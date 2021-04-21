@@ -1,5 +1,6 @@
 import React from "react";
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/core";
 import {
   SafeAreaView,
   Text,
@@ -16,6 +17,12 @@ import fonts from "../../styles/fonts";
 import { Container } from "./styles";
 
 export function Welcome() {
+  const navigation = useNavigation();
+
+  function handleSubmit() {
+    navigation.navigate("UserIdentification");
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
@@ -27,7 +34,11 @@ export function Welcome() {
         você{"\n"}
         sempre que precisar.
       </Text>
-      <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.button}
+        activeOpacity={0.7}
+        onPress={handleSubmit}
+      >
         <Feather name={"chevron-right"} style={styles.buttonIcon} />
       </TouchableOpacity>
     </SafeAreaView>
