@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation, useRoute } from "@react-navigation/core";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 import Button from "../../components/Button";
@@ -7,28 +7,45 @@ import Button from "../../components/Button";
 import colors from "../../styles/colors";
 import fonts from "../../styles/fonts";
 
-// import { Container } from './styles';
+interface Params {
+  title: string;
+  subtitle: string;
+  buttonTitle: string;
+  icon: "smile" | "hug";
+  nextScreen: string;
+}
+
+const emojis = {
+  smile: "😄",
+  hug: "🤗",
+};
 
 export function Confirmation() {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const {
+    title,
+    subtitle,
+    buttonTitle,
+    icon,
+    nextScreen,
+  } = route.params as Params;
 
   function handleSubmit() {
-    navigation.navigate("PlantsSelection");
+    navigation.navigate(nextScreen);
   }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={styles.form}>
-          <Text style={styles.emoji}>😄</Text>
+          <Text style={styles.emoji}>{emojis[icon]}</Text>
           <View style={styles.header}>
-            <Text style={styles.title}>Prontinho</Text>
-            <Text style={styles.subtitle}>
-              Agora vamos começar a cuidar das suas{"\n"}plantinhas com muito
-              cuidado.
-            </Text>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.subtitle}>{subtitle}</Text>
           </View>
           <View style={styles.buttonView}>
-            <Button title="Começar" onPress={handleSubmit} />
+            <Button title={buttonTitle} onPress={() => handleSubmit()} />
           </View>
         </View>
       </View>

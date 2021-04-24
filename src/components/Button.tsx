@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 16,
     height: 56,
-    width: Dimensions.get("window").width * 0.7,
+    width: Dimensions.get("window").width * 0.72,
   },
   buttonText: {
     color: colors.white,
